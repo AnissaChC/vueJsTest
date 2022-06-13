@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div class="content">
+    <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
     <div class="top-row">
       <div class="top part">
         <div class="robot-name">
           {{ selectedRobot.heads.title }}
+          <span class="sale" v-if="selectedRobot.heads.onSale">Sale!</span>
         </div>
         <img :src="selectedRobot.heads.src" title="head" alt=""/>
         <button @click="selectPreviousHead()" class="prev-selector">&#9668;</button>
@@ -34,6 +36,24 @@
         <button @click="selectNextBase()" class="next-selector">&#9658;</button>
       </div>
     </div>
+
+    <div>
+      <h1>Cart</h1>
+      <table>
+        <thead>
+        <tr>
+          <th>Robot</th>
+          <th class="cost">cost</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(robot, index) in cart" :key="index">
+          <td>{{ robot.heads.title }}</td>
+          <td class="cost">{{ robot.cost }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -59,6 +79,7 @@ export default {
       indexArms: 0,
       indexTorso: 0,
       indexBase: 0,
+      cart: [],
     };
   },
   computed: {
@@ -96,11 +117,17 @@ export default {
     selectPreviousBase() {
       this.indexBase = getPreviousValidIndex(this.indexBase, this.parts.bases.length);
     },
+    addToCart() {
+      const robot = this.selectedRobot;
+      const cost = robot.heads.cost + robot.arm.cost * 2 + robot.bases.cost + robot.torsos.cost;
+      // Object.assign({}, robot, { cost }) =
+      this.cart.push({ ...robot, cost });
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .part {
   position: relative;
   width: 165px;
@@ -213,5 +240,31 @@ export default {
   top: -25px;
   text-align: center;
   width: 100%;
+}
+
+.sale {
+  color: red;
+}
+
+.content {
+  position: relative;
+}
+
+.add-to-cart {
+  position: absolute;
+  right: 30px;
+  width: 220px;
+  padding: 3px;
+  font-size: 16px;
+}
+
+td, th{
+  text-align: left;
+  padding: 5px;
+  padding-right: 20px;
+}
+
+.cost{
+  text-align: right;
 }
 </style>
