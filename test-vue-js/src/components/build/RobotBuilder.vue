@@ -2,7 +2,8 @@
   <div class="content">
     <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
     <div class="top-row">
-      <div class="top part">
+      <div class="top part" :class="{'sale-border':selectedRobot.heads.onSale}">
+        <!--      <div class="top part" :style="headBorderStyle">-->
         <div class="robot-name">
           {{ selectedRobot.heads.title }}
           <span class="sale" v-if="selectedRobot.heads.onSale">Sale!</span>
@@ -59,6 +60,7 @@
 
 <script>
 import parts from '../../data/parts';
+import createdHookMixin from './created-hook-mixin';
 
 function getNextValidIndex(index, lenght) {
   const incrementIndex = index + 1;
@@ -89,6 +91,11 @@ export default {
         arm: parts.arms[this.indexArms],
         torsos: parts.torsos[this.indexTorso],
         bases: parts.bases[this.indexBase],
+      };
+    },
+    headBorderStyle() {
+      return {
+        border: this.selectedRobot.heads.onSale ? '3px solid red' : '3px solid green',
       };
     },
   },
@@ -124,6 +131,7 @@ export default {
       this.cart.push({ ...robot, cost });
     },
   },
+  mixins: [createdHookMixin],
 };
 </script>
 
@@ -258,13 +266,17 @@ export default {
   font-size: 16px;
 }
 
-td, th{
+td, th {
   text-align: left;
   padding: 5px;
   padding-right: 20px;
 }
 
-.cost{
+.cost {
   text-align: right;
+}
+
+.sale-border {
+  border: 3px solid red;
 }
 </style>
