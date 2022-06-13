@@ -30,3 +30,9 @@ HelloWorld,
 },
 };`
 
+### pour ajouter la configuartion du SASS :
+`npm install node-sass sass-loader --save-d`
+
+et dans la balse style il faut ajouter : 
+`lang="scss"`
+
