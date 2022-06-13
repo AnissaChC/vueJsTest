@@ -10,8 +10,8 @@
     </nav>
   </header>
   <main>
-    <HomePage/>
     <RobotBuilder/>
+    <HomePage/>
   </main>
 </template>
 
