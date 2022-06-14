@@ -1,5 +1,7 @@
 <template>
   <div class="content">
+    <div class="part-info" id="partInfo"></div>
+
     <div class="preview">
       <CollapsibleSection></CollapsibleSection>
       <CollapsibleSection>
@@ -19,6 +21,7 @@
       </CollapsibleSection>
       <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
     </div>
+
     <div class="top-row">
       <!--      <div class="top part" :class="{'sale-border':selectedRobot.heads.onSale}">-->
       <!--        &lt;!&ndash;      <div class="top part" :style="headBorderStyle">&ndash;&gt;-->
@@ -284,5 +287,14 @@ td, th {
 }
 .rotate-left {
   transform: rotate(-90deg);
+}
+
+.part-info {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 210px;
+  height: 210px;
+  padding: 5px;
 }
 </style>
