@@ -1,6 +1,21 @@
 <template>
   <div class="content">
-    <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
+    <div class="preview">
+      <div class="preview-content">
+        <div class="top-row">
+          <img :src="selectedRobot.heads.src" alt=""/>
+        </div>
+        <div class="middle-row">
+          <img :src="selectedRobot.leftArm.src" class="rotate-left" alt=""/>
+          <img :src="selectedRobot.torsos.src" alt=""/>
+          <img :src="selectedRobot.rightArm.src" class="rotate-right" alt=""/>
+        </div>
+        <div class="bottom-row">
+          <img :src="selectedRobot.bases.src" alt=""/>
+        </div>
+      </div>
+      <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
+    </div>
     <div class="top-row">
       <!--      <div class="top part" :class="{'sale-border':selectedRobot.heads.onSale}">-->
       <!--        &lt;!&ndash;      <div class="top part" :style="headBorderStyle">&ndash;&gt;-->
@@ -13,23 +28,28 @@
       <partSelector
         :parts="parts.heads"
         position="top"
+        @partSelected="part => selectedRobot.heads = part"
       />
     </div>
     <div class="middle-row">
       <partSelector
         :parts="parts.arms"
-        position="left"/>
+        position="left"
+        @partSelected="part => selectedRobot.leftArm = part"/>
       <partSelector
         :parts="parts.torsos"
-        position="center"/>
+        position="center"
+        @partSelected="part => selectedRobot.torsos = part"/>
       <partSelector
         :parts="parts.arms"
-        position="right"/>
+        position="right"
+        @partSelected="part => selectedRobot.rightArm = part"/>
     </div>
     <div class="bottom-row">
       <partSelector
         :parts="parts.bases"
-        position="bottom"/>
+        position="bottom"
+        @partSelected="part => selectedRobot.bases = part"/>
     </div>
 
     <div>
@@ -66,8 +86,9 @@ export default {
       cart: [],
       selectedRobot: {
         heads: {},
-        arm: {},
+        leftArm: {},
         torsos: {},
+        rightArm: {},
         bases: {},
       },
     };
@@ -82,7 +103,8 @@ export default {
   methods: {
     addToCart() {
       const robot = this.selectedRobot;
-      const cost = robot.heads.cost + robot.arm.cost * 2 + robot.bases.cost + robot.torsos.cost;
+      const cost = robot.heads.cost + robot.leftArm.cost + robot.rightArm.cost
+        + robot.bases.cost + robot.torsos.cost;
       // Object.assign({}, robot, { cost }) =
       this.cart.push({ ...robot, cost });
     },
@@ -216,8 +238,7 @@ export default {
 
 .add-to-cart {
   position: absolute;
-  right: 30px;
-  width: 220px;
+  width: 210px;
   padding: 3px;
   font-size: 16px;
 }
@@ -234,5 +255,27 @@ td, th {
 
 .sale-border {
   border: 3px solid red;
+}
+
+.preview {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  width: 210px;
+  height: 210px;
+  padding: 5px;
+}
+.preview-content {
+  border: 1px solid #999;
+}
+.preview img {
+  width: 50px;
+  height: 50px;
+}
+.rotate-right {
+  transform: rotate(90deg);
+}
+.rotate-left {
+  transform: rotate(-90deg);
 }
 </style>
