@@ -1,5 +1,6 @@
 <template>
   <div class="part" :class="position">
+    <div>User: {{userName.userName}}</div>
     <img :src="selectedPart.src"
          @click="showPartInfo = !showPartInfo"
          @keypress="showPartInfo = !showPartInfo"
@@ -31,6 +32,7 @@ function getPreviousValidIndex(index, lenght) {
 
 export default {
   // props: ['parts', 'position'],
+  inject: ['userName'],
   props: {
     parts: {
       type: Array,
