@@ -6,6 +6,9 @@
           <img class="logo" src="./assets/logo.png" alt=""/>
           Bild-Your-App
         </li>
+        <li>user: {{user.userName}}
+        <button @click="changeUserName()">change Name</button>
+        </li>
       </ul>
     </nav>
   </header>
@@ -23,10 +26,26 @@ import search from './search/SearchComponent.vue';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      user: { userName: 'jhon' },
+    };
+  },
   components: {
     RobotBuilder,
     HomePage,
     search,
+  },
+  /* envoyere l'info a tout ces desendant */
+  provide() {
+    return {
+      userName: this.user,
+    };
+  },
+  methods: {
+    changeUserName() {
+      this.user.userName = 'Name';
+    },
   },
 };
 </script>
