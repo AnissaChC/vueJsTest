@@ -58,13 +58,13 @@ export default {
     },
   },
   /* ajout de created pour initialiser comme ngOnInt() */
-  // created() {
-  //   this.emitSelectedPart();
-  // },
-  /* les valeurs de l'output est mis a jour a chaque changement du valeur */
-  updated() {
+  created() {
     this.emitSelectedPart();
   },
+  /* les valeurs de l'output est mis a jour a chaque changement du valeur */
+  /* updated() {
+    this.emitSelectedPart();
+  }, */
   methods: {
     emitSelectedPart() {
       this.$emit('partSelected', this.selectedPart);
