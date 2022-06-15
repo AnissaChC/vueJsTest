@@ -3,26 +3,28 @@
     <nav>
       <ul>
         <li class="nav-item">
+          <router-link active-class="activeRoot" class="nav-link" :to="{name: 'Home'}" exact>
           <img class="logo" src="./assets/logo.png" alt=""/>
           Bild-Your-App
+          </router-link>
         </li>
-        <li>user: {{user.userName}}
-        <button @click="changeUserName()">change Name</button>
+        <li class="nav-item">
+          <router-link active-class="activeRoot" class="nav-link" :to="{name: 'Build'}" exact>
+            Bild
+          </router-link>
         </li>
+<!--        <li>user: {{user.userName}}-->
+<!--        <button @click="changeUserName()">change Name</button>-->
+<!--        </li>-->
       </ul>
     </nav>
   </header>
   <main>
-    <search/>
-    <RobotBuilder/>
-    <HomePage/>
+    <router-view/>
   </main>
 </template>
 
 <script>
-import RobotBuilder from './components/build/RobotBuilder.vue';
-import HomePage from './components/home/HomePage.vue';
-import search from './search/SearchComponent.vue';
 
 export default {
   name: 'App',
@@ -30,11 +32,6 @@ export default {
     return {
       user: { userName: 'jhon' },
     };
-  },
-  components: {
-    RobotBuilder,
-    HomePage,
-    search,
   },
   /* envoyere l'info a tout ces desendant */
   provide() {
@@ -77,7 +74,7 @@ main {
 
 header {
   background-color: #999;
-  width: 1084px;
+  width: 95%;
   margin: 0 auto;
 }
 
@@ -96,5 +93,17 @@ ul {
 .logo {
   vertical-align: middle;
   height: 30px;
+}
+
+.nav-link{
+  text-decoration: none;
+  color: inherit;
+}
+/*.router-link-active {*/
+/*  color: white;*/
+/*}*/
+
+.activeRoot{
+  color: aquamarine;
 }
 </style>

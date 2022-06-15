@@ -1,7 +1,12 @@
 #vueJsTest
 ****
 #Installation :
-a ajouter les commandes
+
+### lancer l'application 
+`npm run serve`
+
+### ajout du router
+`npm install vue-router`
 ****
 #Remarque Util :
 ### props :
@@ -35,4 +40,5 @@ HelloWorld,
 
 et dans la balse style il faut ajouter : 
 `lang="scss"`
+
 
