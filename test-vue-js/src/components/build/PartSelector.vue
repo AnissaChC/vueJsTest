@@ -2,8 +2,8 @@
   <div class="part" :class="position">
     <div>User: {{userName.userName}}</div>
     <img :src="selectedPart.src"
-         @click="showPartInfo = !showPartInfo"
-         @keypress="showPartInfo = !showPartInfo"
+         @click="shwoPartInfo()"
+         @keypress="shwoPartInfo()"
          title="head" alt=""/>
     <button @click="selectPreviousPart()" class="prev-selector"></button>
     <button @click="selectNextPart()" class="next-selector"></button>
@@ -75,6 +75,15 @@ export default {
     selectPreviousPart() {
       this.selectedPartIndex = getPreviousValidIndex(this.selectedPartIndex, this.parts.length);
     },
+    shwoPartInfo() {
+      this.$router.push({
+        name: 'PartInfo',
+        params: {
+          id: this.selectedPart.id,
+          partType: this.selectedPart.type,
+        },
+      });
+    },
   },
 };
 
@@ -109,6 +118,7 @@ export default {
 
 .part img {
   width: 165px;
+  cursor: pointer;
 }
 
 .top {

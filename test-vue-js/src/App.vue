@@ -13,6 +13,12 @@
             Bild
           </router-link>
         </li>
+        <li class="nav-item">
+          <router-link active-class="activeRoot" class="nav-link" :to="{name: 'BrowsePart'}" exact>
+            Browser
+          </router-link>
+
+        </li>
 <!--        <li>user: {{user.userName}}-->
 <!--        <button @click="changeUserName()">change Name</button>-->
 <!--        </li>-->
