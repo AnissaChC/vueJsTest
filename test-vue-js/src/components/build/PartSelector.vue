@@ -62,9 +62,9 @@ export default {
     this.emitSelectedPart();
   },
   /* les valeurs de l'output est mis a jour a chaque changement du valeur */
-  /* updated() {
+  updated() {
     this.emitSelectedPart();
-  }, */
+  },
   methods: {
     emitSelectedPart() {
       this.$emit('partSelected', this.selectedPart);
