@@ -1,19 +1,25 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../components/home/HomePage.vue';
 import RobotBuilder from '../components/build/RobotBuilder.vue';
 
 export default createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
       name: 'Home',
-      component: HomePage,
+      components: {
+        default: HomePage,
+        sidebar: () => import('../components/sidebars/SidebarStandard.vue'),
+      },
     },
     {
       path: '/build',
       name: 'Build',
-      component: RobotBuilder,
+      components: {
+        default: RobotBuilder,
+        sidebar: () => import('../components/sidebars/SidebarBuild.vue'),
+      },
     },
     {
       path: '/partInfo/browse',
@@ -47,6 +53,10 @@ export default createRouter({
       name: 'PartInfo',
       component: () => import('../components/parts/PartInfo.vue'),
       props: true,
+      beforeEnter(to, from, next) {
+        const isIdValid = Number.isInteger(Number(to.params.id));
+        next(isIdValid);
+      },
     },
   ],
 });
